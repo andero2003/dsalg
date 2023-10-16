@@ -1,4 +1,3 @@
-import { fibonacci, fibonacciIterative, fibonacciMemoized } from "./worksheets/worksheet3";
+import { fibonacci, fibonacciIterative, fibonacciMemoized, gcd } from "./worksheets/worksheet3";
 
-let fibTest = fibonacci(10);
-console.log(fibTest);
+let gcdTest = gcd(17, 199);
