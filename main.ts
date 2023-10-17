@@ -1,3 +1,5 @@
-import { fibonacci, fibonacciIterative, fibonacciMemoized, gcd } from "./worksheets/worksheet3";
+import { fibonacci, fibonacciIterative, fibonacciMemoized, gcd, getPalindromeSubstrings, isPalindrome, mergeSort, quickSort } from "./worksheets/worksheet3";
 
-let gcdTest = gcd(17, 199);
+let str: string = 'dsalg';
+console.log(getPalindromeSubstrings(str));
+
