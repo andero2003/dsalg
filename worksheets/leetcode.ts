@@ -162,11 +162,8 @@ export function isIsomorphic(s: string, t: string) {
             }
             result += ' ' + numberToReplaceWith.toString();
         }
-        console.log(found);
         return result
     }   
     
-    console.log(convertToNumbers("abcdefghijklmnopqrstuvwxyzva"));
-    console.log(convertToNumbers("abcdefghijklmnopqrstuvwxyzck"));
     return convertToNumbers(s) === convertToNumbers(t);
 };
