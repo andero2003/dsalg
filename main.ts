@@ -1,4 +1,4 @@
-import { fibonacci, fibonacciIterative, fibonacciMemoized, gcd } from "./worksheets/worksheet3";
+import { fibonacci, fibonacciIterative, fibonacciMemoized, gcd, getPalindromeSubstrings, isPalindrome, mergeSort, quickSort } from "./worksheets/worksheet3";
 import { ListNode, canConstruct, generateParenthesis, isIsomorphic, merge, swapPairs } from './worksheets/leetcode';
 
-console.log(isIsomorphic("egg", "aad"));
+let gcdTest = gcd(17, 199);
