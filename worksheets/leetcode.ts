@@ -167,3 +167,129 @@ export function isIsomorphic(s: string, t: string) {
     
     return convertToNumbers(s) === convertToNumbers(t);
 };
+
+export function majorityElement(nums: number[]): number {
+    let mapping = new Map<number, number>();
+    for (let num of nums) {
+        if (!mapping.has(num)) {
+            mapping.set(num, 0);
+        }
+        mapping.set(num, mapping.get(num) + 1);
+        if (mapping.get(num) > Math.floor(nums.length/2)) {
+            return num;
+        }
+    }
+};
+
+//[7,1,5,3,6,4];
+// 1 -> 6: profit = 5
+export function maxProfit(prices: number[]): number {
+    let max = 0;
+    let sell = 1;
+    let buy = 0;
+
+    while(sell < prices.length) {
+        if(prices[sell] > prices[buy]) {
+            max = Math.max(max, prices[sell] - prices[buy])
+        } else {
+            buy = sell;
+        }
+        sell++;
+    }
+
+    return max;
+};
+
+/*
+   2
+  3 4
+ 6 5 7
+4 1 8 3
+The minimum path sum from top to bottom is 2 + 3 + 5 + 1 = 11.
+*/
+export function minimumTotal(triangle: number[][]): number {
+    let n = triangle.length;
+    let memo = new Map<string, number>;
+    function dp(row: number, col: number) {
+        let id = row.toString() + ',' + col.toString();
+        if (memo.has(id)) {
+            return memo.get(id);
+        }
+        if (row === n - 1) {
+            return triangle[row][col];
+        }
+        let value = triangle[row][col] + Math.min(dp(row+1, col), dp(row+1, col+1));
+        memo.set(id, value);
+        return value;
+    }
+    return dp(0,0);
+};
+
+export function minPathSum(grid: number[][]): number {
+    let totalRows = grid.length;
+    let totalCols = grid[0].length;
+    let memo = new Map<string, number>;
+    function dp(row: number, col: number) {
+        let id = row.toString() + ',' + col.toString();
+        if (memo.has(id)) {
+            return memo.get(id);
+        }
+        if (row === totalRows - 1 && col === totalCols - 1) {
+            return grid[row][col];
+        }
+        if (row >= totalRows || col >= totalCols) { //out of bounds
+            return Infinity;
+        }
+        let value = grid[row][col] + Math.min(dp(row+1, col), dp(row, col+1));
+        memo.set(id, value);
+        return value;
+    }
+    return dp(0,0);    
+};
+
+export function uniquePathsWithObstacles(obstacleGrid: number[][]): number {
+    let totalRows = obstacleGrid.length;
+    let totalCols = obstacleGrid[0].length;
+    let memo = new Map<string, number>();
+    function dp(row: number, col: number) {
+        let id = row.toString() + ',' + col.toString();
+        if (memo.has(id)) {
+            return memo.get(id);
+        }
+        if (row >= totalRows || col >= totalCols) { //out of bounds or on obstacle
+            return 0;
+        }
+        if (obstacleGrid[row][col] == 1 ) {
+            return 0;
+        }
+        if (row === totalRows - 1 && col === totalCols - 1) {
+            return 1;
+        }
+
+        memo.set(id, dp(row+1, col) + dp(row, col+1));
+        return memo.get(id);
+    }
+    return dp(0,0);        
+};
+
+export function rob(nums: number[]): number {
+    let n = nums.length;
+    let memo = new Map<number, number>();
+
+    function dp(startIndex: number) {
+        //rob this house or rob next house
+        if (memo.has(startIndex)) {
+            return memo.get(startIndex);
+        }
+        if (startIndex > n - 1) {
+            return 0;
+        }
+        if (startIndex === n - 1) {
+            return nums[startIndex];
+        }
+        let value = Math.max(nums[startIndex] + dp(startIndex + 2), nums[startIndex+1] + dp(startIndex+3));
+        memo.set(startIndex, value);
+        return value;
+    }
+    return dp(0);
+};
