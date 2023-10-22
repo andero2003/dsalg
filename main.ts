@@ -1,5 +1,5 @@
 import { fibonacci, fibonacciIterative, fibonacciMemoized, gcd, getPalindromeSubstrings, isPalindrome, mergeSort, quickSort } from "./worksheets/worksheet3";
-import { ListNode, canConstruct, generateParenthesis, isIsomorphic, majorityElement, maxProfit, merge, minPathSum, minimumTotal, rob, swapPairs, uniquePathsWithObstacles } from './worksheets/leetcode';
+import { ListNode, canConstruct, decodeString, generateParenthesis, isIsomorphic, majorityElement, maxProfit, merge, mergeAlternately, minPathSum, minimumTotal, removeStars, rob, swapPairs, uniquePathsWithObstacles } from './worksheets/leetcode';
 
-let houses = [1,2,3,1]
-console.log(rob(houses));
+let word: string = "3[a]2[bc]";
+console.log(decodeString(word));

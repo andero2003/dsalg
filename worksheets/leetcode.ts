@@ -293,3 +293,54 @@ export function rob(nums: number[]): number {
     }
     return dp(0);
 };
+
+export function mergeAlternately(word1: string, word2: string): string {
+    let longerLength: number = Math.max(word1.length, word2.length);
+    let result: string = "";
+    for (let i = 0; i < longerLength; i++) {
+        if (i < word1.length) {
+            result += word1.charAt(i);
+        }
+        if (i < word2.length) {
+            result += word2.charAt(i);
+        }
+    }
+    return result;
+};
+
+export function removeStars(s: string): string {
+    let stack = [];
+    for (let char of s) {
+        if (char === "*") {
+            stack.pop();
+        } else {
+            stack.push(char);
+        }
+    }
+    return stack.join('');
+};
+
+//3[a]2[bc] => aaabcbc
+//3[a2[c]] => accaccacc
+export function decodeString(s: string): string {
+    let stack: string[] = [];
+    let result = '';
+    for (let i = 0; i < s.length; i++) {
+        let char = s.charAt(i);
+        if (char != ']') {
+            stack.push(char);
+        } else {
+            let substr: string = "";
+            while (stack[stack.length - 1] != '[') {
+                substr = stack.pop() + substr;
+            }
+            stack.pop(); // pop the bracket
+            let k: string = "";
+            while (stack.length > 0 && !isNaN(parseInt(stack[stack.length-1]))) {
+                k = stack.pop() + k;
+            }
+            stack.push(substr.repeat(parseInt(k)));
+        }
+    }
+    return stack.join('');
+};
