@@ -344,3 +344,47 @@ export function decodeString(s: string): string {
     }
     return stack.join('');
 };
+
+export function permute(nums: number[]): number[][] {
+    let result: number[][] = [];
+    if (nums.length == 1) {
+        return [[...nums]];
+    }
+    for (let i = 0; i < nums.length; i++) {
+        let n: number = nums.shift();
+        let perms: number[][] = permute(nums);
+        for (let perm of perms) {
+            perm.push(n);
+            result.push(perm);
+        }
+        nums.push(n);
+    }
+    return result;
+};
+
+export function canJump(nums: number[]): boolean {
+    let memo = new Map<number, boolean>();
+    function dp(currentIndex: number): boolean {
+        if (memo.has(currentIndex)) {
+            return memo.get(currentIndex);
+        }
+        if (currentIndex == nums.length - 1) {
+            memo.set(currentIndex, true);
+            return true;
+        }
+        let maxJump = nums[currentIndex];
+        if (maxJump == 0 || currentIndex >= nums.length) {
+            memo.set(currentIndex, false);
+            return false;
+        }
+        for (let i = 1; i < maxJump + 1; i++) {
+            if (dp(currentIndex + i)) {
+                return true;
+            }
+        }
+        memo.set(currentIndex, false);
+        return false;
+    }
+
+    return dp(0);
+};

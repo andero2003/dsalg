@@ -46,7 +46,7 @@ export class LinkedList {
         }
         return null;
     }
-
+    
     delete(target: any): ListNode | null { 
         if (this.isEmpty()) {
             return null;
@@ -86,18 +86,51 @@ export class LinkedList {
     }
 
     sort(): void {
-        if (this.isEmpty) {
+        if (this.isEmpty()) {
             return;
         }
-        //todo
+        for (let i = 0; i < this.length; i++) {
+            let swapped = false; 
+            for (let j = 0; j < this.length - i - 1; j++) {
+                let node1: ListNode = this.getByIndex(j);
+                let node2: ListNode = this.getByIndex(j+1);
+                if (node2 != null && node1.val > node2.val) {
+                    let temp = node1.val
+                    node1.val = node2.val;
+                    node2.val = temp;
+                    swapped = true;
+                }
+            }
+            if (!swapped) { break; }
+        }
+    }
+    getByIndex(j: number): ListNode {
+        let i = 0;
+        let current: ListNode = this.head;
+        while (i < j) {
+            i++;
+            current = current.next;
+        }
+        return current;
     }
 
+    //
+    // 3 -> 4 -> 1 -> 7
+    // 7 -> 1 -> 4 -> 3
+
     reverse(): void {
-        if (this.isEmpty) { return; }
-        let current: ListNode = this.head;
+        if (this.isEmpty() || this.head.next == null) { return; }
         let previous: ListNode = null;
-        while (current) {
-            
+        let current: ListNode = this.head;
+        let tempNext: ListNode = null;
+
+        while (current != null) {
+            tempNext = current.next;
+            current.next = previous;
+            previous = current;
+            current = tempNext;
         }
+
+        this.head = previous;
     }
 }
