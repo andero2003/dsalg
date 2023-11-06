@@ -388,3 +388,53 @@ export function canJump(nums: number[]): boolean {
 
     return dp(0);
 };
+
+export function removeNthFromEnd(head: ListNode | null, n: number): ListNode | null {
+    if (head.next == null) {
+        return null;
+    }
+
+    let readyToRemove: boolean = false
+
+    function recurse(node: ListNode) {
+        if (node.next == null) {
+            if (n == 1) {
+                readyToRemove = true;
+            }
+            return 1;
+        }
+        let val: number = 1 + recurse(node.next);
+        if (readyToRemove) {
+            readyToRemove = false;
+            node.next = node.next.next;
+            return;
+        }
+        if (val == n) {
+            readyToRemove = true;
+        }
+        return val;
+    }
+    recurse(head);
+
+    if (readyToRemove) {
+        head = head.next;
+    }
+
+    return head;
+};
+
+export function deleteDuplicates(head: ListNode | null): ListNode | null {
+    let seen = new Map<number, boolean>();
+    let current: ListNode = head;
+    let previous: ListNode = head;
+    while (current) {
+        if (seen.has(current.val)) {
+            previous.next = current.next;
+        } else {
+            previous = current;
+        }
+        seen.set(current.val, true);
+        current = current.next;
+    }
+    return head;
+};
