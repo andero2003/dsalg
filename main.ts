@@ -2,17 +2,15 @@ import { fibonacci, fibonacciIterative, fibonacciMemoized, gcd, getPalindromeSub
 import { ListNode, canConstruct, canJump, decodeString, deleteDuplicates, generateParenthesis, isIsomorphic, majorityElement, maxProfit, merge, mergeAlternately, minPathSum, minimumTotal, permute, removeNthFromEnd, removeStars, rob, swapPairs, uniquePathsWithObstacles } from './worksheets/leetcode';
 import { LinkedList } from "./worksheets/worksheet4";
 import { TreeNode, breadthFirstTraversal, countLeafNodes, countNodes, deleteFromBST, inOrder, insertIntoBST } from "./worksheets/worksheet5";
+import { AVLTree, SplayTree } from "./worksheets/worksheet6";
 
+const splayTree = new SplayTree();
+const values = [10,20,30,40,50,25];
 
-let root = new TreeNode(3);
+values.forEach((val) => {
+    splayTree.insert(val);
+})
 
-insertIntoBST(5, root);
-insertIntoBST(1, root);
-insertIntoBST(12, root);
-insertIntoBST(4, root);
-insertIntoBST(8, root);
-insertIntoBST(22, root);
-insertIntoBST(2, root);
-insertIntoBST(-1, root);
-
-console.log(countLeafNodes(root));
+breadthFirstTraversal(splayTree.root, (node) => {
+    console.log(`${node?.val} `);
+});
